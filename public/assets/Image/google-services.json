@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "984199565171",
+    "project_id": "parentopia-dbcbb",
+    "storage_bucket": "parentopia-dbcbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:984199565171:android:3c6ba21c06eb9a08697f06",
+        "android_client_info": {
+          "package_name": "com.example.real_parentopia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn41YXWUIxR6uE9bxN-r6tHbmWrp9GjmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

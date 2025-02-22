@@ -1,0 +1,1 @@
+<img src="{{ asset('assets/logo/logo.png') }}" alt="{{ config('app.name', 'Unused Goodies') }}">

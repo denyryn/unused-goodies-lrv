@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42972737812",
+    "project_id": "parentopia-cc4ab",
+    "storage_bucket": "parentopia-cc4ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42972737812:android:42f5690d802e8ef835d201",
+        "android_client_info": {
+          "package_name": "com.example.parentopia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBG0u5WLYDs1R5uZuS7Uh7U3eOv2souDS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
