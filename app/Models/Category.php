@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Category extends Model
 {
@@ -16,6 +17,8 @@ class Category extends Model
         'slug',
         'description',
         'is_recent',
+        'image_url',
+        'image_hover_url'
     ];
 
     /**
@@ -39,5 +42,15 @@ class Category extends Model
         return [
 
         ];
+    }
+
+    /**
+     * Set the slug attribute for the category.
+     *
+     * @param string $value The value to be converted into a slug.
+     */
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
     }
 }
