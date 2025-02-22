@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->foreignId('product_id')->nullable()->index();
             $table->string('image_url');
             $table->string('image_name');
-            $table->int('order_number')->nullable();
+            $table->integer('order_number')->nullable();
             $table->timestamps();
         });
     }
