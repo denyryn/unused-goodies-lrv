@@ -15,3 +15,7 @@
 .text-theme-invert {
     @apply dark:text-base-100 text-gray-900
 }
+
+/* .btn-primary {
+    @apply 
+} */
