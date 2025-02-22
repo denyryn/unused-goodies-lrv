@@ -12,11 +12,11 @@
         <form class="card-body" method="POST" action="{{ route('register') }}">
             @csrf
 
-            <div class=" form-control">
+            <!-- <div class=" form-control">
                 <x-label for="name" value="{{ __('Name') }}" />
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required
                     autofocus autocomplete="name" />
-            </div>
+            </div> -->
 
             <div class=" form-control">
                 <x-label for="email" value="{{ __('Email') }}" />
