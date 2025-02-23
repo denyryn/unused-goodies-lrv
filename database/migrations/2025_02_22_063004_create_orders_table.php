@@ -13,11 +13,14 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->foreignId('address_id')->nullable()->index();
-            $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'));
-            $table->decimal('total_amount');
-            $table->timestamps();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->foreignId('address_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('order_number')->unique();
+            $table->enum('status', array_column(OrderStatusEnum::cases(), 'value'))->index();
+            $table->decimal('total_amount', 10, 2)->unsigned();
+            $table->json('metadata')->nullable();
+            $table->timestamps(3);
+            $table->softDeletes();
         });
     }
 

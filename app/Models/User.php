@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasAvatar;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,7 +12,7 @@ use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use App\Enums\RoleEnum;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasApiTokens;
 
@@ -29,8 +31,8 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'password',
         'role',
+        'password',
     ];
 
     /**
@@ -96,5 +98,21 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Determine if the user can access the specified Filament panel.
+     *
+     * @param \Filament\Panel $panel
+     * @return bool True if the user is an admin, false otherwise.
+     */
+    public function canAccessPanel(\Filament\Panel $panel): bool
+    {
+        return $this->role === RoleEnum::ADMIN;
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->avatar_url;
     }
 }

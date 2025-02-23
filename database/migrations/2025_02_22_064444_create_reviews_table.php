@@ -12,11 +12,14 @@ return new class extends Migration {
     {
         Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
-            $table->foreignId('product_id')->nullable()->index();
-            $table->integer('rating');
-            $table->text('comment');
-            $table->timestamps();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->unsignedTinyInteger('rating')->check('rating >= 1 AND rating <= 5')->index();
+            $table->text('comment')->nullable();
+            $table->json('images')->nullable();
+            $table->unsignedInteger('helpful_count')->default(0);
+            $table->unsignedInteger('not_helpful_count')->default(0);
+            $table->timestamps(3);
         });
     }
 

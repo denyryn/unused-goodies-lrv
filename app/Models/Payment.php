@@ -18,6 +18,10 @@ class Payment extends Model
         'transaction_id',
         'payment_method',
         'payment_status',
+        'amount',
+        'refund_amount',
+        'gateway_response',
+        'failure_reason',
     ];
 
     /**

@@ -13,13 +13,13 @@ return new class extends Migration {
     {
         Schema::create('addresses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->foreignId('user_id')->nullable()->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('phone');
-            $table->string('full_address');
+            $table->string('phone', 20);
+            $table->text('full_address');
             $table->string('detail_location')->nullable();
-            $table->boolean('is_main_address');
-            $table->enum('type', array_column(AddressTypeEnum::cases(), 'value'));
+            $table->boolean('is_main_address')->default(false)->index();
+            $table->enum('type', array_column(AddressTypeEnum::cases(), 'value'))->index();
             $table->timestamps();
         });
     }

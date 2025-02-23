@@ -13,12 +13,13 @@ class Category extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'parent_id',
         'name',
         'slug',
         'description',
         'is_recent',
-        'image_url',
-        'image_hover_url'
+        'image_path',
+        'image_hover_path'
     ];
 
     /**

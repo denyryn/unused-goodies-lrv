@@ -15,6 +15,8 @@ class Product extends Model
         'category_id',
         'name',
         'slug',
+        'sku',
+        'status',
         'stock',
         'description',
         'price',
@@ -25,7 +27,7 @@ class Product extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<ProductImage>
      */
-    public function productImage()
+    public function productImages()
     {
         return $this->hasMany(ProductImage::class);
     }

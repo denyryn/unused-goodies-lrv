@@ -11,8 +11,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->string('image_url')->nullable();
-            $table->string('image_hover_url')->nullable();
+            $table->string('default_image_path', 2048)->nullable();
+            $table->string('image_hover_path', 2048)->nullable();
         });
     }
 
@@ -22,7 +22,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropColumn(['image_url', 'image_hover_url']);
+            $table->dropColumn(['default_image_path', 'image_hover_path']);
         });
     }
 };

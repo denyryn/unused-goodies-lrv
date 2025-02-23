@@ -12,10 +12,9 @@ return new class extends Migration {
     {
         Schema::create('product_images', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->nullable()->index();
-            $table->string('image_url');
-            $table->string('image_name');
-            $table->integer('order_number')->nullable();
+            $table->foreignId('product_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->string('image_path');
+            $table->unsignedInteger('order_number')->startingValue(0)->nullable();
             $table->timestamps();
         });
     }
