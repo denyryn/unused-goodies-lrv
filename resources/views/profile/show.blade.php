@@ -40,6 +40,7 @@
                     @livewire('profile.delete-user-form')
                 </div>
             @endif
+
         </div>
     </div>
 </x-app-layout>
