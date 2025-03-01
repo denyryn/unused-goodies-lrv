@@ -26,7 +26,7 @@ class FortifyServiceProvider extends ServiceProvider
             public function toResponse($request)
             {
                 return redirect()->intended(
-                    Permission::isAdmin() ? route('dashboard') : route('landing')
+                    app(Permission::class)->isAdmin() ? route('dashboard') : route('landing')
                 );
             }
         });
