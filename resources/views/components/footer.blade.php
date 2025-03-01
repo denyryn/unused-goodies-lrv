@@ -1,4 +1,4 @@
-<footer class="p-10 footer footer-center bg-base-100 text-base-content min-h-fit">
+<footer class="p-10 footer footer-center bg-theme text-base-content min-h-fit">
     <nav class="grid grid-flow-col gap-4">
         <a class="link link-hover">About us</a>
         <a class="link link-hover">Contact</a>
