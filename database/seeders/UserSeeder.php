@@ -13,18 +13,21 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => bcrypt('password'),
-            'role' => RoleEnum::ADMIN->value,
-        ]);
-
-        \App\Models\User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@user.com',
-            'password' => bcrypt('password'),
-            'role' => RoleEnum::USER->value,
-        ]);
+        \App\Models\User::factory()->createMany(
+            [
+                [
+                    'name' => 'Admin',
+                    'email' => 'admin@admin.com',
+                    'password' => bcrypt('password'),
+                    'role' => RoleEnum::ADMIN->value,
+                ],
+                [
+                    'name' => 'User',
+                    'email' => 'user@user.com',
+                    'password' => bcrypt('password'),
+                    'role' => RoleEnum::USER->value,
+                ]
+            ]
+        );
     }
 }
