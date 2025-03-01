@@ -31,14 +31,19 @@ class UserResource extends Resource
             ->schema([
                 TextInput::make('email')
                     ->email()->required(),
-                Radio::make('role')
-                    ->options(collect(RoleEnum::cases())->mapWithKeys(fn($case) => [$case->value => $case->label()]))
-                    ->required(),
-                TextInput::make('password')->password()->required(),
+                TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->visibleOn('create'),
                 TextInput::make('name')
                     ->label('Full Name'),
                 TextInput::make('phone')
                     ->label('Phone Number'),
+                Radio::make('role')
+                    ->required()
+                    ->options(collect(RoleEnum::cases())->mapWithKeys(fn($case) => [$case->value => $case->label()]))
+                    ->default(RoleEnum::USER->value)
+                    ->columnSpanFull(),
             ]);
     }
 
@@ -62,7 +67,8 @@ class UserResource extends Resource
                     ->label('Full Name'),
                 TextColumn::make('phone')
                     ->searchable()
-                    ->label('Phone Number'),
+                    ->label('Phone Number')
+                    ->default('N/A'),
             ])
             ->filters([
                 SelectFilter::make('role')
