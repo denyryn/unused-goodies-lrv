@@ -36,6 +36,17 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     ];
 
     /**
+     * Get the carts associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Cart>
+     */
+
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    /**
      * Get the addresses associated with the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Address>

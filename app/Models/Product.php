@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Product extends Model
 {
@@ -21,6 +22,16 @@ class Product extends Model
         'description',
         'price',
     ];
+
+    /**
+     * Get the carts that contain this product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Cart>
+     */
+    public function cart()
+    {
+        return $this->hasMany(Cart::class);
+    }
 
     /**
      * Get the product images that belong to this product.
@@ -73,4 +84,30 @@ class Product extends Model
 
         ];
     }
+
+    /**
+     * Set the slug attribute for the category.
+     *
+     * @param string $value The value to be converted into a slug.
+     */
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value);
+    }
+
+    /**
+     * Get the formatted product price in IDR.
+     *
+     * @return string
+     */
+    public function getFormattedPriceAttribute()
+    {
+        return 'IDR ' . number_format($this->attributes['price'], 2, ',', '.');
+    }
+
+    public function getFormattedStockAttribute()
+    {
+        return (number_format($this->attributes['stock']) . __(' pcs'));
+    }
+
 }

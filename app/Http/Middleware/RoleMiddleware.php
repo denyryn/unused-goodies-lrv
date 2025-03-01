@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RoleEnum;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +21,7 @@ class RoleMiddleware
          * Check if the user is authenticated and their role matches the required role
          * This utilizes the RoleEnum to ensure the user's role is properly validated
          */
-        if (!Auth::check() || Auth::user()->role !== $role) {
+        if (!Auth::check() || Auth::user()->role !== RoleEnum::from($role)) {
             abort(403, 'Unauthorized access');
         }
         return $next($request);

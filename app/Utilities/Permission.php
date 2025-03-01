@@ -5,13 +5,13 @@ use App\Enums\RoleEnum;
 
 class Permission
 {
-    public static function isUserLoggedIn()
+    public static function isLoggedIn()
     {
         return auth()->check();
     }
 
-    public static function isAdmin()
+    public function isAdmin()
     {
-        return auth()->user()->role == RoleEnum::ADMIN;
+        return $this->isLoggedIn() && auth()->user()->role == RoleEnum::ADMIN;
     }
 }
