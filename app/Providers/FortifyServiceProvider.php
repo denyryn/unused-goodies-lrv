@@ -10,6 +10,7 @@ use App\Utilities\Permission;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
@@ -25,9 +26,13 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request)
             {
-                return redirect()->intended(
-                    app(Permission::class)->isAdmin() ? route('dashboard') : route('landing')
-                );
+                $redirectUrl = $request->session()->pull('redirect_after_login');
+
+                if (!filter_var($redirectUrl, FILTER_VALIDATE_URL)) {
+                    $redirectUrl = route('home_page');
+                }
+
+                return redirect()->intended($redirectUrl);
             }
         });
     }

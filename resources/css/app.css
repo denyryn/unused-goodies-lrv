@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-primary: #000000;
+    --color-primary-dark: #000000;
+    --color-primary-light: #000000;
+
+    --color-background-dark: #1f2937;
+    --color-background-light: #f3f4f6;
+
+    --color-accent: #3498db;
+    --color-accent-light: #2980b9;
+    --color-accent-dark: #57abea;
+
+    --color-light-gray: #c2c2c2;
+    --color-middle-gray: #757575;
+    --color-dark-gray: #2c2c2c;
+}
+
 [x-cloak] {
     display: none;
 }
@@ -10,8 +27,12 @@
     @apply bg-gray-100 dark:bg-gray-800
 }
 
+.bg-theme-primary {
+    @apply bg-gray-100 dark:bg-gray-800
+}
+
 .bg-theme-secondary {
-    @apply bg-gray-100 dark:bg-gray-700
+    @apply bg-gray-200 dark:bg-gray-900
 }
 
 .text-theme {
@@ -30,6 +51,9 @@
     @apply text-gray-700 dark:text-gray-200
 }
 
+.product-checkbox {
+    @apply checkbox bg-gray-100 dark:bg-gray-900 border-gray-300
+}
 
 
 /* .btn-primary {

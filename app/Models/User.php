@@ -36,6 +36,16 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     ];
 
     /**
+     * Get the wishlists associated with the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Wishlist>
+     */
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    /**
      * Get the carts associated with the user.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Cart>
@@ -125,5 +135,10 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function getFilamentAvatarUrl(): ?string
     {
         return $this->avatar_url;
+    }
+
+    public function hasWished($product)
+    {
+        return $this->wishlists()->where('product_id', $product->id)->exists();
     }
 }

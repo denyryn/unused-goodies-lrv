@@ -42,13 +42,20 @@
         <main>
             {{ $slot }}
         </main>
+
+        <!-- Footer -->
+        <x-footer />
     </div>
 
     @stack('modals')
 
     @livewireScripts
     <!-- Livewire Components -->
-    <livewire:cart-manager />
+    @livewire('Cart.CartManager')
+    @livewire('Wishlist.WishlistManager')
+    @livewire('toast-notification')
+
+    @bukScripts
 </body>
 
 </html>

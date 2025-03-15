@@ -7,12 +7,20 @@ use App\Application\CartApplication;
 
 class CartController extends Controller
 {
+    private $data = [];
+    private $cartApplication;
+
+    public function __construct(CartApplication $cartApplication)
+    {
+        $this->cartApplication = $cartApplication;
+    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $this->data['cartItems'] = $this->cartApplication->getUserCart();
+        return view('cart.show', $this->data);
     }
 
     /**

@@ -24,6 +24,17 @@ class Product extends Model
     ];
 
     /**
+     * Get the wishlists that include this product.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany<Wishlist>
+     */
+
+    public function wishlists()
+    {
+        return $this->hasMany(Wishlist::class);
+    }
+
+    /**
      * Get the carts that contain this product.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany<Cart>

@@ -20,7 +20,7 @@
 <nav x-data="{ open: false }" class="bg-theme border-gray-200 dark:border-gray-950 shadow">
     <div class="navbar text-theme-invert">
         <div class="navbar-start">
-            <a href="{{ \App\Utilities\Permission::isLoggedIn() ? route('dashboard') : route('home_page') }}"
+            <a href="{{ route('home_page') }}"
                 class="btn btn-ghost w-fit h-fit">
                 <img class="flex items-center justify-center w-14" src="{{ asset('assets/Logo/logo.svg') }}"
                     alt="{{ config('app.name', 'Unused Goodies') }}">
@@ -35,7 +35,7 @@
         </div>
         <div class="navbar-end space-x-1">
             @if (\App\Utilities\Permission::isLoggedIn())
-                <livewire:floating-cart>
+                <livewire:cart.components.floating-cart>
             @endif
             
             <div class="hidden sm:flex sm:items-center sm:ms-6">
@@ -122,15 +122,17 @@
                                     {{ __('Profile') }}
                                 </x-dropdown-link>
 
-                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                                @if (Laravel\Jetstream\Jetstream::hasApiFeatures() && \App\Utilities\Permission::isAdmin())
                                     <x-dropdown-link href="{{ route('api-tokens.index') }}">
                                         {{ __('API Tokens') }}
                                     </x-dropdown-link>
                                 @endif
 
-                                <x-dropdown-link href="/admin" :active="request()->is('admin*')">
-                                    {{ __('Admin Panel') }}
-                                </x-dropdown-link>
+                                @if (\App\Utilities\Permission::isAdmin())
+                                    <x-dropdown-link href="/admin" :active="request()->is('admin*')">
+                                        {{ __('Admin Panel') }}
+                                    </x-dropdown-link>
+                                @endif
 
                                 <div class="border-t border-gray-200 dark:border-gray-600"></div>
 

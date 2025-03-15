@@ -10,8 +10,8 @@ class Permission
         return auth()->check();
     }
 
-    public function isAdmin()
+    public static function isAdmin()
     {
-        return $this->isLoggedIn() && auth()->user()->role == RoleEnum::ADMIN;
+        return self::isLoggedIn() && auth()->user()->role == RoleEnum::ADMIN;
     }
 }

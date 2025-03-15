@@ -47,4 +47,9 @@ class ProductRepository
             ->where('slug', $productSlug)
             ->first();
     }
+
+    public function getProductStock($id)
+    {
+        return $this->product->find($id)->stock;
+    }
 }

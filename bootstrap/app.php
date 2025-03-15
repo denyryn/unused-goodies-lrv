@@ -15,5 +15,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias(['role' => App\Http\Middleware\RoleMiddleware::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+
+    })
+    ->withExceptions(function ($exceptions) {
+        $exceptions->render(function (App\Exceptions\CartException $exception, Illuminate\Http\Request $request) {
+            return back()->with('error', $exception->getMessage());
+        });
     })->create();

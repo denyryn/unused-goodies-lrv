@@ -40,10 +40,7 @@
 
                         <!-- buttons - start -->
                         <div class="flex gap-2.5">
-                            <button class="btn btn-outline btn-primary w-full"
-                                wire:click="$dispatch('add-to-cart', { productId: {{ $product->id }} })">
-                                Add to cart
-                            </button>
+                            <livewire:cart.components.add-to-cart-button :product="$product" />
                         </div>
                         <!-- buttons - end -->
                     </div>
