@@ -17,7 +17,7 @@
             <div class="relative items-center w-full max-w-lg p-5 bg-theme rounded-lg shadow-lg">
                 <div class="flex items-center justify-between">
                     <h3 class="text-base font-medium text-theme-invert">
-                        Cart({{ count($cartItems) }})
+                        Cart({{ count($cartItems) ?? 0 }})
                     </h3>
                     <x-link>
                         More
