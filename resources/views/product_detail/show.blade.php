@@ -40,7 +40,7 @@
 
                         <!-- buttons - start -->
                         <div class="flex gap-2.5">
-                            <livewire:cart.components.add-to-cart-button :product="$product" />
+                            <livewire:cart.add-to-cart productId="{{ $product->id }}" />
                         </div>
                         <!-- buttons - end -->
                     </div>
