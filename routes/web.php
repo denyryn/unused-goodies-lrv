@@ -42,7 +42,7 @@ Route::middleware([])
         Route::prefix('category')->group(function () {
             Route::get('/', [PagesController::class, 'category'])
                 ->name('category_page');
-            Route::get('/{categorySlug?}product', [ProductController::class, 'index'])
+            Route::get('/{categorySlug?}/product', [ProductController::class, 'index'])
                 ->where('categorySlug', '[a-zA-Z0-9-]*')
                 ->name('product_page');
         });

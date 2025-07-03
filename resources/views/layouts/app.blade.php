@@ -51,7 +51,6 @@
 
     @livewireScripts
     <!-- Livewire Components -->
-    @livewire('Cart.CartManager')
     @livewire('Wishlist.WishlistManager')
     @livewire('toast-notification')
 

@@ -1,4 +1,4 @@
-<div x-data="{ show: @entangle('show') }" 
+<div x-data="{ show: @entangle('show').live }" 
      x-show="show" 
      x-init="window.addEventListener('toast-hide', event => setTimeout(() => show = false, event.detail.time))"
      class="absolute bottom-5 right-5 flex items-center w-full max-w-xs p-4 mb-4 text-gray-500 bg-white rounded-lg shadow-sm dark:text-gray-400 dark:bg-gray-800"
