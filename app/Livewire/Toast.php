@@ -19,7 +19,7 @@ class Toast extends Component
         $this->show = true;
 
         // Auto-hide the toast after 3 seconds
-        $this->dispatchBrowserEvent('toast-hide', ['time' => 3000]);
+        $this->dispatch('toast-hide', ['time' => 3000]);
     }
 
     public function closeToast()
