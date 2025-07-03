@@ -1,0 +1,67 @@
+name: Deploy to Showoff Master Environment (Ubuntu 22.04)
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: test
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - &ssh_template
+        name: Placeholder
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: ""
+
+      - <<: *ssh_template
+        name: Pull latest code
+        with:
+          script: |
+            ssh -T -p 2222 denyryn@localhost << 'EOF'
+              cd /home/denyryn/Deploy/katresna-creations
+              git fetch origin
+              git reset --hard origin/test
+            EOF
+
+      - <<: *ssh_template
+        name: Install PHP dependencies
+        with:
+          script: |
+            ssh -T -p 2222 denyryn@localhost << 'EOF'
+              cd /home/denyryn/Deploy/unused-goodies-lrv
+              composer install --no-dev --optimize-autoloader
+            EOF
+
+      - <<: *ssh_template
+        name: Build frontend
+        with:
+          script: |
+            ssh -T -p 2222 denyryn@localhost << 'EOF'
+              cd /home/denyryn/Deploy/unused-goodies-lrv
+              npm ci
+              npm run build
+            EOF
+
+      - <<: *ssh_template
+        name: Clear cache & restart nginx
+        with:
+          script: |
+            ssh -T -p 2222 denyryn@localhost << 'EOF'
+              cd /home/denyryn/Deploy/unused-goodies-lrv
+              php artisan optimize:clear
+              php artisan config:cache
+              php artisan route:cache
+              php artisan view:cache
+              sudo systemctl restart nginx
+            EOF
