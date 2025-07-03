@@ -18,7 +18,7 @@ class CartApplication
     {
         $this->cartRepository = $cartRepository;
         $this->productRepository = $productRepository;
-        $this->user_id = auth()->id();
+        $this->user_id = Auth::id();
     }
 
     protected function isRecordExists($product_id)
@@ -27,11 +27,16 @@ class CartApplication
             ->isRecordExists($this->user_id, $product_id);
     }
 
-    protected function isProductQuantitySufficient($product_id)
+    protected function isProductExceedsStock($product_id)
     {
+        $product_stock = $this->productRepository->getProductStock($product_id);
+
+        if ($product_stock <= 0) {
+            return false;
+        }
+
         return $this->cartRepository
-            ->hasItemMoreThanQuantity($this->user_id, $product_id, ($this->productRepository
-                ->getProductStock($product_id) - 1));
+            ->hasItemMoreThanQuantity($this->user_id, $product_id, $product_stock);
     }
 
     protected function hasItemMoreThanOneQuantity($product_id)
@@ -40,10 +45,10 @@ class CartApplication
             ->hasItemMoreThanQuantity($this->user_id, $product_id, 1);
     }
 
-    public function getUserCart()
+    public function getUserCart($limit = null)
     {
         return $this->cartRepository
-            ->getUserCart($this->user_id);
+            ->getUserCart($this->user_id, $limit);
     }
 
     public function getTotalItemsInCart()
@@ -53,10 +58,15 @@ class CartApplication
 
     public function addProductToCart($product_id)
     {
+        if ($this->isProductExceedsStock($product_id)) {
+            return session()->flash('error', 'Product quantity is not sufficient.');
+        }
+
         if ($this->isRecordExists($product_id)) {
             return $this->cartRepository
                 ->incrementCartItemQuantity($this->user_id, $product_id);
         }
+
         return $this->cartRepository
             ->addProductToCart($this->user_id, $product_id);
     }
@@ -76,8 +86,8 @@ class CartApplication
 
     public function incrementCartItemQuantity($product_id)
     {
-        if ($this->isProductQuantitySufficient($product_id)) {
-            return;
+        if ($this->isProductExceedsStock($product_id)) {
+            return session()->flash('error', 'Insufficient stock for this product.');
         }
         return $this->cartRepository
             ->incrementCartItemQuantity($this->user_id, $product_id);
@@ -94,9 +104,9 @@ class CartApplication
     }
 
 
-    public function getTotalPriceOfSelectedItems($items)
+    public function getTotalPriceOfSelectedItems($itemsIds)
     {
-        return $this->cartRepository->getTotalPriceOfSelectedItems($items);
+        return $this->cartRepository->getTotalPriceOfSelectedItems($itemsIds);
     }
 
     public function getTotalPriceOfUserCart()
@@ -109,4 +119,52 @@ class CartApplication
         return $this->cartRepository->removeProductsFromCart($this->user_id, $items);
     }
 
+    public function getUserCheckedItems()
+    {
+        return $this->cartRepository->getUserCheckedItems($this->user_id);
+    }
+
+    public function getCheckedItemsTotalPrice()
+    {
+        $items = $this->getUserCheckedItems();
+        if ($items->isEmpty()) {
+            return 0;
+        }
+        return $this->cartRepository->getTotalPriceOfSelectedItems($items->pluck('id')->toArray());
+    }
+
+    public function toggleCheckAllItems($checkAll)
+    {
+        if ($checkAll && !$this->isAllItemsChecked()) {
+            $this->cartRepository->checkAllItems($this->user_id);
+            return;
+        }
+
+        $this->cartRepository->uncheckAllItems($this->user_id);
+        return;
+    }
+
+    public function toggleItemCheck($product_id)
+    {
+        if ($this->isItemChecked($product_id)) {
+            return $this->cartRepository->uncheckItem($this->user_id, $product_id);
+        }
+
+        return $this->cartRepository->checkItem($this->user_id, $product_id);
+    }
+
+    public function isItemChecked($product_id)
+    {
+        return $this->cartRepository->isItemChecked($this->user_id, $product_id);
+    }
+
+    public function isAllItemsChecked()
+    {
+        return $this->cartRepository->isAllItemsChecked($this->user_id);
+    }
+
+    public function removeCheckedItems()
+    {
+        return $this->cartRepository->removeCheckedItems($this->user_id);
+    }
 }

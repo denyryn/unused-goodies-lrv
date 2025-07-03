@@ -50,6 +50,12 @@ class ProductRepository
 
     public function getProductStock($id)
     {
-        return $this->product->find($id)->stock;
+        $product = $this->product->find($id);
+
+        if (!$product || !isset($product->stock)) {
+            throw new \Exception("Product not found or stock information is missing.");
+        }
+
+        return (int) $product->stock;
     }
 }
