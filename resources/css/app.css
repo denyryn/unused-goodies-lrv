@@ -24,38 +24,40 @@
 }
 
 .bg-theme {
-    @apply bg-gray-100 dark:bg-gray-800
+    @apply bg-gray-100 dark:bg-gray-800;
 }
 
 .bg-theme-primary {
-    @apply bg-gray-100 dark:bg-gray-800
+    @apply bg-gray-100 dark:bg-gray-800;
 }
 
 .bg-theme-secondary {
-    @apply bg-gray-200 dark:bg-gray-900
+    @apply bg-gray-200 dark:bg-gray-900;
 }
 
 .text-theme {
-    @apply text-gray-100 dark:text-gray-900
+    @apply text-gray-100 dark:text-gray-900;
 }
 
 .text-theme-invert {
-    @apply text-gray-900 dark:text-gray-100
+    @apply text-gray-900 dark:text-gray-100;
 }
 
 .text-theme-invert-primary {
-    @apply text-gray-900 dark:text-gray-100
+    @apply text-gray-900 dark:text-gray-100;
 }
 
 .text-theme-invert-secondary {
-    @apply text-gray-700 dark:text-gray-200
+    @apply text-gray-700 dark:text-gray-200;
 }
 
 .product-checkbox {
-    @apply checkbox bg-gray-100 dark:bg-gray-900 border-gray-300
+    @apply checkbox size-5 bg-gray-100 dark:bg-gray-900 rounded text-primary focus:ring-primary border-gray-300;
 }
 
-
+.quantity-stepper-btn {
+    @apply p-1 px-3 rounded hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none;
+}
 /* .btn-primary {
     @apply 
 } */
