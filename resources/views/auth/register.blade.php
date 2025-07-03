@@ -20,19 +20,19 @@
 
             <div class=" form-control">
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                <x-input id="email" class="block mt-1 w-full input input-bordered" type="email" name="email" :value="old('email')" required
                     autocomplete="username" />
             </div>
 
             <div class=" form-control">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                <x-input id="password" class="block mt-1 w-full input input-bordered" type="password" name="password" required
                     autocomplete="new-password" />
             </div>
 
             <div class=" form-control">
                 <x-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password"
+                <x-input id="password_confirmation" class="block mt-1 w-full input input-bordered" type="password"
                     name="password_confirmation" required autocomplete="new-password" />
             </div>
 

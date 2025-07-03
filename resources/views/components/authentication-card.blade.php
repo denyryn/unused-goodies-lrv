@@ -1,5 +1,5 @@
 <div class="hero bg-base-200 min-h-screen lg:px-24">
-    <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="hero-content flex-col lg:flex-row-reverse max-w-6xl">
         @if(isset($quote))
             <div class="ml-10 text-center lg:text-left">
                 {{ $quote }}

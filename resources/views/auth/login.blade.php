@@ -21,13 +21,13 @@
 
             <div class="form-control">
                 <x-label for="email" value="{{ __('Email') }}" />
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required
+                <x-input id="email" class="block input input-bordered mt-1 w-full" type="email" name="email" :value="old('email')" required
                     autofocus autocomplete="username" />
             </div>
 
             <div class="form-control">
                 <x-label for="password" value="{{ __('Password') }}" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" required
+                <x-input id="password" class="input input-bordered block mt-1 w-full" type="password" name="password" required
                     autocomplete="current-password" />
 
                 @if (Route::has('password.request'))
@@ -39,7 +39,7 @@
 
             <div class="form-control block">
                 <label for="remember_me" class="flex items-center">
-                    <x-checkbox id="remember_me" name="remember" />
+                    <x-checkbox id="remember_me" name="remember" class="checkbox rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" />
                     <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
                 </label>
             </div>
